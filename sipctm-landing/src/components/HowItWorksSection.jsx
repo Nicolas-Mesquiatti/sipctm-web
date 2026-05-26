@@ -35,7 +35,7 @@ export default function HowItWorksSection() {
       id="how-it-works"
       className="section"
       ref={ref}
-      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+      style={{ background: 'var(--bg)', position: 'relative', overflow: 'hidden' }}
     >
       <ToolsParticles />
 
@@ -98,7 +98,7 @@ export default function HowItWorksSection() {
                       width: 68,
                       height: 68,
                       borderRadius: '50%',
-                      background: '#0D1220',
+                      background: 'var(--surface)',
                       border: '2px solid var(--blue-main)',
                       display: 'flex',
                       alignItems: 'center',

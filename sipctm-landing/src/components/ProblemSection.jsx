@@ -1,14 +1,15 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { X } from 'lucide-react';
 import ToolsParticles from './ToolsParticles';
 
 const PROBLEMS = [
-  { emoji: '❌', text: 'Órdenes de trabajo en papel que se pierden o son ilegibles' },
-  { emoji: '❌', text: 'No sabés cuántos repuestos te quedan en stock hasta que ya es tarde' },
-  { emoji: '❌', text: 'Los presupuestos los hacés a mano y tardás horas' },
-  { emoji: '❌', text: 'Los clientes llaman para saber el estado del auto y no tenés info rápida' },
-  { emoji: '❌', text: 'No tenés control real de los ingresos y gastos del taller' },
-  { emoji: '❌', text: 'El historial de cada vehículo está disperso en libretas y WhatsApps' },
+  'Órdenes de trabajo en papel que se pierden o son ilegibles',
+  'No sabés cuántos repuestos te quedan en stock hasta que ya es tarde',
+  'Los presupuestos los hacés a mano y tardás horas',
+  'Los clientes llaman para saber el estado del auto y no tenés info rápida',
+  'No tenés control real de los ingresos y gastos del taller',
+  'El historial de cada vehículo está disperso en libretas y WhatsApps',
 ];
 
 export default function ProblemSection() {
@@ -20,7 +21,7 @@ export default function ProblemSection() {
       id="problem"
       className="section"
       ref={ref}
-      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+      style={{ background: 'var(--bg)', position: 'relative', overflow: 'hidden' }}
     >
       <ToolsParticles />
 
@@ -46,7 +47,7 @@ export default function ProblemSection() {
               gap: '1rem',
             }}
           >
-            {PROBLEMS.map((p, i) => (
+            {PROBLEMS.map((text, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -57,12 +58,27 @@ export default function ProblemSection() {
                   padding: '1.25rem 1.5rem',
                   display: 'flex',
                   alignItems: 'flex-start',
-                  gap: '1rem',
-                  borderColor: 'rgba(200,50,50,0.12)',
+                  gap: '0.875rem',
                 }}
               >
-                <span style={{ fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem' }}>{p.emoji}</span>
-                <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.5 }}>{p.text}</p>
+                {/* X azul del logo */}
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: 6,
+                    background: 'rgba(59,107,200,0.12)',
+                    border: '1px solid rgba(59,107,200,0.2)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    marginTop: '0.05rem',
+                  }}
+                >
+                  <X size={14} color="#3B6BC8" strokeWidth={2.5} />
+                </div>
+                <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.55 }}>{text}</p>
               </motion.div>
             ))}
           </div>

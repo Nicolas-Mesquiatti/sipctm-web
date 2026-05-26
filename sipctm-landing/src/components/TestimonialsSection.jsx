@@ -35,7 +35,7 @@ export default function TestimonialsSection() {
     <section
       className="section"
       ref={ref}
-      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+      style={{ background: 'var(--bg)', position: 'relative', overflow: 'hidden' }}
     >
       <ToolsParticles />
 

@@ -34,14 +34,14 @@
 }
 
 [data-theme="light"] {
-  --bg:       #F0F4FF;
+  --bg:       #EDF1FA;
   --surface:  #FFFFFF;
-  --surface-2:#E8EEF8;
+  --surface-2:#E4ECFA;
   --border:   #C5D5F0;
   --text:     #0D1A35;
   --text-2:   #2D5BB8;
   --text-3:   #6A8ACC;
   --glow:     rgba(59, 107, 200, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(59, 107, 200, 0.25);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(59, 107, 200, 0.22);
 }

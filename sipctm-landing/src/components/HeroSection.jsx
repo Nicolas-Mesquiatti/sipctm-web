@@ -6,7 +6,7 @@ import LogoSVG from './LogoSVG';
 const TYPEWRITER_TEXT = 'Gestioná tu taller mecánico con inteligencia';
 const TYPEWRITER_DELAY = 40;
 
-export default function HeroSection() {
+export default function HeroSection({ isDark }) {
   const [typed, setTyped] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
@@ -34,7 +34,7 @@ export default function HeroSection() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        background: '#060810',
+        background: 'var(--bg)',
         paddingTop: 80,
       }}
     >
@@ -50,7 +50,10 @@ export default function HeroSection() {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 0.35,
+          opacity: isDark ? 0.35 : 0.22,
+          filter: isDark
+            ? 'brightness(0.6) saturate(0.8)'
+            : 'brightness(1.1) saturate(0.6) sepia(0.15)',
           zIndex: 0,
           pointerEvents: 'none',
         }}
@@ -58,13 +61,14 @@ export default function HeroSection() {
         <source src="/tools-video.mp4" type="video/mp4" />
       </video>
 
-      {/* z-index 1 — Overlay degradado: translúcido arriba, sólido abajo */}
+      {/* z-index 1 — Overlay degradado */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background:
-            'linear-gradient(to bottom, rgba(6,8,16,0.5) 0%, rgba(6,8,16,0.7) 60%, rgba(6,8,16,1) 100%)',
+          background: isDark
+            ? 'linear-gradient(to bottom, rgba(6,8,16,0.5) 0%, rgba(6,8,16,0.75) 70%, rgba(6,8,16,1) 100%)'
+            : 'linear-gradient(to bottom, rgba(237,241,250,0.55) 0%, rgba(237,241,250,0.82) 70%, rgba(237,241,250,1) 100%)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
@@ -118,11 +122,12 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.35 }}
           style={{
-            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontSize: 'clamp(1.85rem, 5vw, 3.5rem)',
             fontWeight: 800,
             lineHeight: 1.15,
             letterSpacing: '-0.025em',
             maxWidth: 720,
+            color: 'var(--text)',
           }}
         >
           <span>{typed}</span>
@@ -145,7 +150,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
           style={{
-            fontSize: 'clamp(1rem, 2vw, 1.25rem)',
+            fontSize: 'clamp(1rem, 2vw, 1.2rem)',
             color: 'var(--text-2)',
             maxWidth: 540,
             lineHeight: 1.7,
@@ -169,7 +174,11 @@ export default function HeroSection() {
           >
             Empezar gratis
           </a>
-          <a href="#how-it-works" className="btn btn-secondary" style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}>
+          <a
+            href="#how-it-works"
+            className="btn btn-secondary"
+            style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}
+          >
             Ver cómo funciona
           </a>
         </motion.div>

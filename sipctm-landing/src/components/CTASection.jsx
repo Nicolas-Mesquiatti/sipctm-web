@@ -25,7 +25,7 @@ export default function CTASection() {
   return (
     <section
       className="section"
-      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+      style={{ background: 'var(--bg)', position: 'relative', overflow: 'hidden' }}
     >
       <ToolsParticles />
 
