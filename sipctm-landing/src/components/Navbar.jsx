@@ -123,7 +123,7 @@ export default function Navbar({ isDark, toggleTheme }) {
           </button>
 
           <a
-            href="https://sipctm.netlify.app/login"
+            href="https://sipctm.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: 14, fontWeight: 500, color: text2Color, transition: 'color 0.15s' }}
@@ -242,7 +242,7 @@ export default function Navbar({ isDark, toggleTheme }) {
             {/* CTAs mobile */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <a
-                href="https://sipctm.netlify.app/login"
+                href="https://sipctm.netlify.app"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

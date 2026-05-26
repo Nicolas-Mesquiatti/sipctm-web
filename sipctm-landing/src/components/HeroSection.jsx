@@ -156,7 +156,7 @@ export default function HeroSection({ isDark }) {
             lineHeight: 1.7,
           }}
         >
-          Controlá órdenes de trabajo, stock, clientes y presupuestos desde un solo lugar. Diseñado para talleres que quieren crecer.
+          Gestión inteligente de clientes, vehículos, órdenes de trabajo e historial de reparaciones. Con IA para estimar tiempos y notificaciones automáticas a clientes.
         </motion.p>
 
         <motion.div

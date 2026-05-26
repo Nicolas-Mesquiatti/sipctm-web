@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useMotionTemplate } from 'framer-motion';
-import { Zap } from 'lucide-react';
+import { Zap, MessageCircle } from 'lucide-react';
 import ToolsParticles from './ToolsParticles';
 
 const DOT_PATTERN = {
@@ -118,12 +118,13 @@ export default function CTASection() {
                 Empezar gratis ahora
               </a>
               <a
-                href="https://sipctm.netlify.app/login"
+                href="https://wa.me/5491155773344?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20SIPCTM"
                 target="_blank" rel="noopener noreferrer"
                 className="btn btn-secondary"
-                style={{ fontSize: '1.0625rem', padding: '1rem 2.25rem' }}
+                style={{ fontSize: '1.0625rem', padding: '1rem 2.25rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}
               >
-                Iniciar sesión
+                <MessageCircle size={18} />
+                Consultar por WhatsApp
               </a>
             </div>
           </div>

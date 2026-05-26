@@ -4,12 +4,12 @@ import { X } from 'lucide-react';
 import ToolsParticles from './ToolsParticles';
 
 const PROBLEMS = [
-  'Órdenes de trabajo en papel que se pierden o son ilegibles',
-  'No sabés cuántos repuestos te quedan en stock hasta que ya es tarde',
-  'Los presupuestos los hacés a mano y tardás horas',
-  'Los clientes llaman para saber el estado del auto y no tenés info rápida',
-  'No tenés control real de los ingresos y gastos del taller',
-  'El historial de cada vehículo está disperso en libretas y WhatsApps',
+  'Las órdenes en papel se pierden, se mojan o son ilegibles — y nadie sabe en qué estado quedó el trabajo',
+  'Sin trazabilidad de reparaciones: no hay registro claro de qué se hizo, cuándo ni quién lo hizo en cada vehículo',
+  'No existe estimación confiable de tiempos: los presupuestos y plazos se dan "a ojo" y generan conflictos con los clientes',
+  'Los clientes llaman constantemente para saber el estado del auto, interrumpiendo el trabajo del taller',
+  'Sobrecarga operativa sin herramientas de planificación: todo se gestiona de memoria o en hojas sueltas',
+  'El historial de cada vehículo está disperso en libretas, WhatsApps y papeles sin ningún orden ni acceso rápido',
 ];
 
 export default function ProblemSection() {
@@ -90,7 +90,7 @@ export default function ProblemSection() {
             style={{ textAlign: 'center', marginTop: '3rem' }}
           >
             <p style={{ fontSize: '1.125rem', color: 'var(--text-2)', maxWidth: 540, margin: '0 auto' }}>
-              <strong style={{ color: 'var(--text)' }}>SIPCTM</strong> resuelve todo esto en un sistema simple, rápido y pensado para talleres argentinos.
+              <strong style={{ color: 'var(--text)' }}>SIPCTM</strong> resuelve todo esto con un sistema simple, rápido y pensado para la realidad del taller.
             </p>
           </motion.div>
         </div>
