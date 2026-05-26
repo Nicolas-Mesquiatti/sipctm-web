@@ -15,8 +15,6 @@ import Footer from './components/Footer';
 export default function App() {
   const { theme, toggleTheme } = useTheme();
   const [loaded, setLoaded] = useState(false);
-  const isDark = theme === 'dark';
-
   return (
     <>
       <Preloader onComplete={() => setLoaded(true)} />
@@ -25,7 +23,7 @@ export default function App() {
         <>
           <Navbar theme={theme} onToggleTheme={toggleTheme} />
           <main style={{ position: 'relative', zIndex: 1 }}>
-            <HeroSection isDark={isDark} />
+            <HeroSection />
             <ProblemSection />
             <FeaturesSection />
             <HowItWorksSection />

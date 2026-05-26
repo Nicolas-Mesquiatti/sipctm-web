@@ -1,39 +1,23 @@
 :root {
-  /* Brand blues */
   --blue-main:    #3B6BC8;
   --blue-dark:    #1E3A6E;
   --blue-light:   #5B8FE8;
   --blue-tech:    #2D5BB8;
   --blue-circuit: #7AB0FF;
 
-  /* Typography */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-12: 3rem;
-  --space-16: 4rem;
-  --space-24: 6rem;
+  --space-1: 0.25rem; --space-2: 0.5rem;  --space-3: 0.75rem;
+  --space-4: 1rem;    --space-6: 1.5rem;  --space-8: 2rem;
+  --space-12: 3rem;   --space-16: 4rem;   --space-24: 6rem;
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-  --radius-full: 9999px;
+  --radius-sm: 6px; --radius-md: 12px; --radius-lg: 20px;
+  --radius-xl: 32px; --radius-full: 9999px;
 
-  /* Transitions */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-  --duration-fast: 150ms;
-  --duration-base: 300ms;
-  --duration-slow: 500ms;
+  --duration-fast: 150ms; --duration-base: 300ms; --duration-slow: 500ms;
 }
 
 [data-theme="dark"] {
@@ -45,8 +29,8 @@
   --text-2:   #7A9ADF;
   --text-3:   #3A5080;
   --glow:     rgba(59, 107, 200, 0.35);
-  --glass-bg: rgba(13, 18, 32, 0.7);
-  --glass-border: rgba(59, 107, 200, 0.2);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(59, 107, 200, 0.15);
 }
 
 [data-theme="light"] {

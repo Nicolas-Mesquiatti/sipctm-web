@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { Zap } from 'lucide-react';
+import ToolsParticles from './ToolsParticles';
 
 const DOT_PATTERN = {
   backgroundImage: 'radial-gradient(circle, rgba(59,107,200,0.55) 1px, transparent 1px)',
@@ -13,6 +14,7 @@ export default function CTASection() {
 
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  const maskImage = useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, black 0%, transparent 100%)`;
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -20,42 +22,37 @@ export default function CTASection() {
     mouseY.set(e.clientY - rect.top);
   };
 
-  const maskImage = useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, black 0%, transparent 100%)`;
-
   return (
-    <section className="section" ref={ref}>
-      <div className="container">
+    <section
+      className="section"
+      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+    >
+      <ToolsParticles />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <motion.div
+          ref={ref}
           onMouseMove={handleMouseMove}
           initial={{ opacity: 0, y: 24, scale: 0.97 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 0.65 }}
-          className="glass-card"
           style={{
             padding: 'clamp(2rem, 6vw, 5rem)',
             textAlign: 'center',
             position: 'relative',
             overflow: 'hidden',
-            borderColor: 'rgba(59,107,200,0.35)',
+            borderRadius: 20,
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(59,107,200,0.35)',
           }}
         >
-          {/* Dot pattern base — siempre visible */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              ...DOT_PATTERN,
-              opacity: 0.25,
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
+          {/* Dot pattern base */}
+          <div style={{ position: 'absolute', inset: 0, ...DOT_PATTERN, opacity: 0.25, pointerEvents: 'none', zIndex: 0 }} />
 
-          {/* Dot pattern iluminado — sigue el cursor con mask */}
+          {/* Dot pattern iluminado — sigue el cursor */}
           <motion.div
             style={{
-              position: 'absolute',
-              inset: 0,
+              position: 'absolute', inset: 0,
               backgroundImage: 'radial-gradient(circle, rgba(91,143,232,0.7) 1px, transparent 1px)',
               backgroundSize: '22px 22px',
               WebkitMaskImage: maskImage,
@@ -68,35 +65,23 @@ export default function CTASection() {
           {/* Glow blob central */}
           <div
             style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
+              position: 'absolute', top: '50%', left: '50%',
               transform: 'translate(-50%, -50%)',
-              width: 400,
-              height: 400,
-              borderRadius: '50%',
+              width: 400, height: 400, borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(59,107,200,0.18) 0%, transparent 70%)',
-              pointerEvents: 'none',
-              zIndex: 0,
+              pointerEvents: 'none', zIndex: 0,
             }}
           />
 
-          {/* Contenido */}
           <div style={{ position: 'relative', zIndex: 1 }}>
             <div
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                padding: '0.35rem 1rem',
-                borderRadius: 999,
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.35rem 1rem', borderRadius: 999,
                 background: 'rgba(59,107,200,0.12)',
                 border: '1px solid rgba(59,107,200,0.25)',
-                fontSize: '0.8125rem',
-                fontWeight: 600,
-                color: 'var(--blue-circuit)',
-                marginBottom: '1.5rem',
-                letterSpacing: '0.06em',
+                fontSize: '0.8125rem', fontWeight: 600, color: 'var(--blue-circuit)',
+                marginBottom: '1.5rem', letterSpacing: '0.06em',
               }}
             >
               <Zap size={13} fill="currentColor" />
@@ -106,10 +91,8 @@ export default function CTASection() {
             <h2
               style={{
                 fontSize: 'clamp(1.75rem, 4vw, 3rem)',
-                fontWeight: 800,
-                lineHeight: 1.2,
-                maxWidth: 600,
-                margin: '0 auto 1.25rem',
+                fontWeight: 800, lineHeight: 1.2,
+                maxWidth: 600, margin: '0 auto 1.25rem',
               }}
             >
               Tu taller merece{' '}
@@ -118,11 +101,8 @@ export default function CTASection() {
 
             <p
               style={{
-                fontSize: '1.0625rem',
-                color: 'var(--text-2)',
-                maxWidth: 480,
-                margin: '0 auto 2.5rem',
-                lineHeight: 1.7,
+                fontSize: '1.0625rem', color: 'var(--text-2)',
+                maxWidth: 480, margin: '0 auto 2.5rem', lineHeight: 1.7,
               }}
             >
               Unite a más de 120 talleres que ya digitalizaron su operación con SIPCTM. Sin letra chica, sin contratos, sin complicaciones.
@@ -131,8 +111,7 @@ export default function CTASection() {
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a
                 href="https://sipctm.netlify.app"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 className="btn btn-primary"
                 style={{ fontSize: '1.0625rem', padding: '1rem 2.25rem' }}
               >
@@ -140,8 +119,7 @@ export default function CTASection() {
               </a>
               <a
                 href="https://sipctm.netlify.app/login"
-                target="_blank"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
                 className="btn btn-secondary"
                 style={{ fontSize: '1.0625rem', padding: '1rem 2.25rem' }}
               >

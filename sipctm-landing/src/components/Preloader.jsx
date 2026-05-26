@@ -103,62 +103,60 @@ export default function Preloader({ onComplete }) {
 }
 
 function PreloaderLogo({ phase }) {
-  const hexLen = 280;
-  const wrenchLen = 200;
+  const hexLen = 285;
 
   return (
     <svg width="120" height="120" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-      {/* Hex stroke animation */}
+      {/* Hexágono — se dibuja primero */}
       <motion.polygon
-        points="50,4 93,27 93,73 50,96 7,73 7,27"
+        points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5"
         stroke="#3B6BC8"
         strokeWidth="5"
-        fill="rgba(59,107,200,0.06)"
+        fill="rgba(59,107,200,0.04)"
         strokeDasharray={hexLen}
         initial={{ strokeDashoffset: hexLen }}
         animate={{ strokeDashoffset: phase >= 0 ? 0 : hexLen }}
         transition={{ duration: 0.6, ease: 'easeInOut' }}
       />
 
-      {/* Wrench body */}
+      {/* Llave inglesa — aparece en fase 1 */}
       <motion.path
-        d="M38 62 L55 45 Q64 36 72 38 Q74 46 65 55 L48 72 Q44 76 40 72 Q36 68 38 62Z"
+        d="M45 25 C38 25 32 31 32 38 C32 42 34 46 37 48 L28 65 C26 68 27 72 30 74 C33 76 37 75 39 72 L48 55 C51 56 54 56 57 54 C63 51 66 44 63 38 C61 34 57 31 53 31 L50 38 L45 38 L42 35 L45 28 Z"
         fill="#3B6BC8"
+        opacity="0.9"
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={phase >= 1 ? { opacity: 1, scale: 1 } : {}}
+        animate={phase >= 1 ? { opacity: 0.9, scale: 1 } : {}}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: '55px 55px' }}
+        style={{ transformOrigin: '47px 50px' }}
       />
 
-      {/* Wrench handle */}
-      <motion.rect
-        x="26" y="56" width="22" height="8" rx="4"
-        transform="rotate(-45 37 60)"
-        fill="#5B8FE8"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={phase >= 1 ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        style={{ transformOrigin: '37px 60px' }}
-      />
+      {/* Trazados de circuito — aparecen en fase 2, uno a uno */}
+      <motion.line x1="62" y1="45" x2="75" y2="45" stroke="#3B6BC8" strokeWidth="3" strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.25, delay: 0 }} />
+      <motion.line x1="75" y1="45" x2="75" y2="35" stroke="#3B6BC8" strokeWidth="3" strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.2 }} />
+      <motion.line x1="75" y1="35" x2="85" y2="35" stroke="#3B6BC8" strokeWidth="3" strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.35 }} />
+      <motion.line x1="75" y1="45" x2="75" y2="55" stroke="#3B6BC8" strokeWidth="3" strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.5 }} />
+      <motion.line x1="75" y1="55" x2="85" y2="55" stroke="#3B6BC8" strokeWidth="3" strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.65 }} />
 
-      {/* Circuit elements appear one by one */}
-      {[
-        <motion.circle key="d1" cx="22" cy="35" r="3" fill="#7AB0FF"
-          initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0 }} />,
-        <motion.line key="l1" x1="22" y1="35" x2="38" y2="35" stroke="#7AB0FF" strokeWidth="2" strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.15 }} />,
-        <motion.circle key="d2" cx="72" cy="30" r="2.5" fill="#7AB0FF"
-          initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.3 }} />,
-        <motion.circle key="d3" cx="78" cy="65" r="3" fill="#5B8FE8"
-          initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.45 }} />,
-        <motion.line key="l2" x1="78" y1="65" x2="65" y2="65" stroke="#5B8FE8" strokeWidth="2" strokeLinecap="round"
-          initial={{ pathLength: 0, opacity: 0 }} animate={phase >= 2 ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{ duration: 0.3, delay: 0.6 }} />,
-      ]}
+      {/* Nodos */}
+      <motion.circle cx="85" cy="35" r="3" fill="#7AB0FF"
+        initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.55 }} />
+      <motion.circle cx="85" cy="55" r="3" fill="#7AB0FF"
+        initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.75 }} />
+      <motion.circle cx="75" cy="45" r="3" fill="#5B8FE8"
+        initial={{ opacity: 0 }} animate={phase >= 2 ? { opacity: 1 } : {}}
+        transition={{ duration: 0.2, delay: 0.1 }} />
     </svg>
   );
 }

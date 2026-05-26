@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { ClipboardList, Package, FileText, Users, BarChart2, Clock } from 'lucide-react';
+import ToolsParticles from './ToolsParticles';
 
 const FEATURES = [
   {
@@ -40,69 +41,74 @@ export default function FeaturesSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="features" className="section" ref={ref}>
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
-        >
-          <p className="section-label">Funciones</p>
-          <h2 className="section-title">Todo lo que tu taller necesita</h2>
-          <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Herramientas diseñadas para la realidad del taller argentino. Sin complicaciones, sin curva de aprendizaje.
-          </p>
-        </motion.div>
+    <section
+      id="features"
+      className="section"
+      ref={ref}
+      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
+    >
+      <ToolsParticles />
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-            gap: '1.5rem',
-          }}
-        >
-          {FEATURES.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="glass-card"
-                style={{
-                  padding: '1.75rem',
-                  cursor: 'default',
-                  transition: 'transform 0.25s, box-shadow 0.25s',
-                }}
-                whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(59,107,200,0.18)' }}
-              >
-                <div
-                  style={{
-                    width: 44,
-                    height: 44,
-                    borderRadius: 12,
-                    background: 'rgba(59,107,200,0.12)',
-                    border: '1px solid rgba(59,107,200,0.2)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: '1rem',
-                    color: 'var(--blue-circuit)',
-                  }}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            style={{ textAlign: 'center', marginBottom: '3.5rem' }}
+          >
+            <p className="section-label">Funciones</p>
+            <h2 className="section-title">Todo lo que tu taller necesita</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
+              Herramientas diseñadas para la realidad del taller argentino. Sin complicaciones, sin curva de aprendizaje.
+            </p>
+          </motion.div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: '1.5rem',
+            }}
+          >
+            {FEATURES.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(59,107,200,0.18)' }}
+                  className="glass-card"
+                  style={{ padding: '1.75rem', cursor: 'default' }}
                 >
-                  <Icon size={20} />
-                </div>
-                <h3 style={{ fontSize: '1.0625rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
-                  {f.title}
-                </h3>
-                <p style={{ fontSize: '0.9rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
-                  {f.desc}
-                </p>
-              </motion.div>
-            );
-          })}
+                  <div
+                    style={{
+                      width: 44,
+                      height: 44,
+                      borderRadius: 12,
+                      background: 'rgba(59,107,200,0.12)',
+                      border: '1px solid rgba(59,107,200,0.2)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: '1rem',
+                      color: 'var(--blue-circuit)',
+                    }}
+                  >
+                    <Icon size={20} />
+                  </div>
+                  <h3 style={{ fontSize: '1.0625rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text)' }}>
+                    {f.title}
+                  </h3>
+                  <p style={{ fontSize: '0.9rem', color: 'var(--text-2)', lineHeight: 1.6 }}>
+                    {f.desc}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

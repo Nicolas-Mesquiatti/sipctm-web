@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Zap, Users } from 'lucide-react';
 import LogoSVG from './LogoSVG';
-import ParticleCanvas from './ParticleCanvas';
 
 const TYPEWRITER_TEXT = 'Gestioná tu taller mecánico con inteligencia';
 const TYPEWRITER_DELAY = 40;
 
-export default function HeroSection({ isDark }) {
+export default function HeroSection() {
   const [typed, setTyped] = useState('');
   const [showCursor, setShowCursor] = useState(true);
 
@@ -35,10 +34,11 @@ export default function HeroSection({ isDark }) {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        background: '#060810',
         paddingTop: 80,
       }}
     >
-      {/* z-index 0 — Video fondo */}
+      {/* z-index 0 — Video protagonista */}
       <video
         autoPlay
         muted
@@ -50,7 +50,7 @@ export default function HeroSection({ isDark }) {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: isDark ? 0.15 : 0.05,
+          opacity: 0.35,
           zIndex: 0,
           pointerEvents: 'none',
         }}
@@ -58,28 +58,24 @@ export default function HeroSection({ isDark }) {
         <source src="/tools-video.mp4" type="video/mp4" />
       </video>
 
-      {/* z-index 1 — Overlay oscuro/claro */}
+      {/* z-index 1 — Overlay degradado: translúcido arriba, sólido abajo */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
-          background: isDark
-            ? 'rgba(6,8,16,0.72)'
-            : 'rgba(240,244,255,0.88)',
+          background:
+            'linear-gradient(to bottom, rgba(6,8,16,0.5) 0%, rgba(6,8,16,0.7) 60%, rgba(6,8,16,1) 100%)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
       />
 
-      {/* z-index 2 — Partículas (canvas absolute dentro del hero) */}
-      <ParticleCanvas isDark={isDark} />
-
-      {/* z-index 3 — Contenido centrado */}
+      {/* z-index 2 — Contenido centrado */}
       <div
         className="container"
         style={{
           position: 'relative',
-          zIndex: 3,
+          zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -189,7 +185,6 @@ export default function HeroSection({ isDark }) {
         </motion.div>
       </div>
 
-      {/* Flecha rebotando */}
       <motion.a
         href="#problem"
         animate={{ y: [0, 8, 0] }}
@@ -199,12 +194,11 @@ export default function HeroSection({ isDark }) {
           bottom: '2.5rem',
           left: '50%',
           transform: 'translateX(-50%)',
-          zIndex: 3,
+          zIndex: 2,
           color: 'var(--text-3)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '0.25rem',
         }}
       >
         <ArrowDown size={20} />

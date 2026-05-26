@@ -1,6 +1,6 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import ToolsParticles from './ToolsParticles';
 
 const PROBLEMS = [
   { emoji: '❌', text: 'Órdenes de trabajo en papel que se pierden o son ilegibles' },
@@ -16,62 +16,68 @@ export default function ProblemSection() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="problem" className="section" ref={ref}
-      style={{ background: 'var(--surface)' }}
+    <section
+      id="problem"
+      className="section"
+      ref={ref}
+      style={{ background: '#060810', position: 'relative', overflow: 'hidden' }}
     >
-      <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          style={{ textAlign: 'center', marginBottom: '3rem' }}
-        >
-          <p className="section-label">El problema</p>
-          <h2 className="section-title">¿Te suena familiar?</h2>
-          <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            Gestionar un taller mecánico sin las herramientas correctas es caos. Cada día perdés tiempo y dinero sin darte cuenta.
-          </p>
-        </motion.div>
+      <ToolsParticles />
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1rem',
-          }}
-        >
-          {PROBLEMS.map((p, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass-card"
-              style={{
-                padding: '1.25rem 1.5rem',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '1rem',
-                borderColor: 'rgba(200,50,50,0.12)',
-              }}
-            >
-              <span style={{ fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem' }}>{p.emoji}</span>
-              <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.5 }}>{p.text}</p>
-            </motion.div>
-          ))}
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            style={{ textAlign: 'center', marginBottom: '3rem' }}
+          >
+            <p className="section-label">El problema</p>
+            <h2 className="section-title">¿Te suena familiar?</h2>
+            <p className="section-subtitle" style={{ margin: '0 auto' }}>
+              Gestionar un taller mecánico sin las herramientas correctas es caos. Cada día perdés tiempo y dinero sin darte cuenta.
+            </p>
+          </motion.div>
+
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+              gap: '1rem',
+            }}
+          >
+            {PROBLEMS.map((p, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={inView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className="glass-card"
+                style={{
+                  padding: '1.25rem 1.5rem',
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  gap: '1rem',
+                  borderColor: 'rgba(200,50,50,0.12)',
+                }}
+              >
+                <span style={{ fontSize: '1.25rem', flexShrink: 0, marginTop: '0.1rem' }}>{p.emoji}</span>
+                <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.5 }}>{p.text}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            style={{ textAlign: 'center', marginTop: '3rem' }}
+          >
+            <p style={{ fontSize: '1.125rem', color: 'var(--text-2)', maxWidth: 540, margin: '0 auto' }}>
+              <strong style={{ color: 'var(--text)' }}>SIPCTM</strong> resuelve todo esto en un sistema simple, rápido y pensado para talleres argentinos.
+            </p>
+          </motion.div>
         </div>
-
-        {/* Transition statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          style={{ textAlign: 'center', marginTop: '3rem' }}
-        >
-          <p style={{ fontSize: '1.125rem', color: 'var(--text-2)', maxWidth: 540, margin: '0 auto' }}>
-            <strong style={{ color: 'var(--text)' }}>SIPCTM</strong> resuelve todo esto en un sistema simple, rápido y pensado para talleres argentinos.
-          </p>
-        </motion.div>
       </div>
     </section>
   );

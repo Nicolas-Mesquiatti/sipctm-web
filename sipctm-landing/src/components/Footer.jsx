@@ -1,4 +1,5 @@
 import LogoSVG from './LogoSVG';
+import ToolsParticles from './ToolsParticles';
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -6,12 +7,16 @@ export default function Footer() {
   return (
     <footer
       style={{
-        background: 'var(--surface)',
+        background: '#060810',
         borderTop: '1px solid var(--border)',
         padding: '3rem 0 2rem',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div className="container">
+      <ToolsParticles />
+
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div
           style={{
             display: 'grid',
@@ -20,7 +25,6 @@ export default function Footer() {
             marginBottom: '3rem',
           }}
         >
-          {/* Brand */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
               <LogoSVG size={28} />
@@ -31,14 +35,14 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Product */}
           <div>
             <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
               Producto
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
               {['Funciones', 'Precios', 'Cómo funciona'].map(l => (
-                <a key={l} href={`#${l.toLowerCase().replace(' ', '-')}`}
+                <a key={l}
+                  href={`#${l.toLowerCase().replace(/\s/g, '-')}`}
                   style={{ fontSize: '0.875rem', color: 'var(--text-3)', transition: 'color 0.2s' }}
                   onMouseEnter={e => e.target.style.color = 'var(--text-2)'}
                   onMouseLeave={e => e.target.style.color = 'var(--text-3)'}
@@ -49,7 +53,6 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Legal */}
           <div>
             <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
               Legal
@@ -67,14 +70,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Contact */}
           <div>
             <p style={{ fontSize: '0.8125rem', fontWeight: 700, color: 'var(--text)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '1rem' }}>
               Contacto
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              <a href="https://sipctm.netlify.app"
-                target="_blank" rel="noopener noreferrer"
+              <a href="https://sipctm.netlify.app" target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '0.875rem', color: 'var(--text-3)', transition: 'color 0.2s' }}
                 onMouseEnter={e => e.target.style.color = 'var(--text-2)'}
                 onMouseLeave={e => e.target.style.color = 'var(--text-3)'}
@@ -85,7 +86,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom bar */}
         <div
           style={{
             borderTop: '1px solid var(--border)',

@@ -1,4 +1,4 @@
-export default function LogoSVG({ size = 40, animated = false }) {
+export default function LogoSVG({ size = 32, color = '#3B6BC8' }) {
   return (
     <svg
       width={size}
@@ -7,41 +7,32 @@ export default function LogoSVG({ size = 40, animated = false }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {/* Hexagon outline */}
+      {/* Hexágono outline */}
       <polygon
-        points="50,4 93,27 93,73 50,96 7,73 7,27"
-        stroke="#3B6BC8"
+        points="50,5 90,27.5 90,72.5 50,95 10,72.5 10,27.5"
+        stroke={color}
         strokeWidth="5"
-        fill={animated ? 'none' : 'rgba(59,107,200,0.08)'}
-        className={animated ? 'logo-hex' : ''}
+        fill="none"
       />
-      {/* Wrench body */}
+
+      {/* Llave inglesa — cuerpo */}
       <path
-        d="M38 62 L55 45 Q64 36 72 38 Q74 46 65 55 L48 72 Q44 76 40 72 Q36 68 38 62Z"
-        fill="#3B6BC8"
-        className={animated ? 'logo-wrench' : ''}
+        d="M45 25 C38 25 32 31 32 38 C32 42 34 46 37 48 L28 65 C26 68 27 72 30 74 C33 76 37 75 39 72 L48 55 C51 56 54 56 57 54 C63 51 66 44 63 38 C61 34 57 31 53 31 L50 38 L45 38 L42 35 L45 28 Z"
+        fill={color}
+        opacity="0.9"
       />
-      {/* Wrench handle */}
-      <rect
-        x="26"
-        y="56"
-        width="22"
-        height="8"
-        rx="4"
-        transform="rotate(-45 37 60)"
-        fill="#5B8FE8"
-        className={animated ? 'logo-wrench' : ''}
-      />
-      {/* Circuit dot top-left */}
-      <circle cx="22" cy="35" r="3" fill="#7AB0FF" className={animated ? 'logo-circuit-1' : ''} />
-      {/* Circuit line top */}
-      <line x1="22" y1="35" x2="38" y2="35" stroke="#7AB0FF" strokeWidth="2" strokeLinecap="round" className={animated ? 'logo-circuit-1' : ''} />
-      {/* Circuit dot top-right */}
-      <circle cx="72" cy="30" r="2.5" fill="#7AB0FF" className={animated ? 'logo-circuit-2' : ''} />
-      {/* Circuit dot bottom-right */}
-      <circle cx="78" cy="65" r="3" fill="#5B8FE8" className={animated ? 'logo-circuit-3' : ''} />
-      {/* Circuit line bottom-right */}
-      <line x1="78" y1="65" x2="65" y2="65" stroke="#5B8FE8" strokeWidth="2" strokeLinecap="round" className={animated ? 'logo-circuit-3' : ''} />
+
+      {/* Trazados de circuito */}
+      <line x1="62" y1="45" x2="75" y2="45" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <line x1="75" y1="45" x2="75" y2="35" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <line x1="75" y1="35" x2="85" y2="35" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <line x1="75" y1="45" x2="75" y2="55" stroke={color} strokeWidth="3" strokeLinecap="round" />
+      <line x1="75" y1="55" x2="85" y2="55" stroke={color} strokeWidth="3" strokeLinecap="round" />
+
+      {/* Nodos del circuito */}
+      <circle cx="85" cy="35" r="3" fill={color} />
+      <circle cx="85" cy="55" r="3" fill={color} />
+      <circle cx="75" cy="45" r="3" fill={color} />
     </svg>
   );
 }
