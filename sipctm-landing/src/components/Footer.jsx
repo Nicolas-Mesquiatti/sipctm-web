@@ -1,6 +1,8 @@
 import LogoSVG from './LogoSVG';
 import ToolsParticles from './ToolsParticles';
 
+const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -28,7 +30,7 @@ export default function Footer() {
           {/* Marca */}
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.75rem' }}>
-              <LogoSVG size={28} />
+              <LogoSVG size={40} />
               <span style={{ fontWeight: 700, fontSize: '1rem', color: 'var(--text)' }}>SIPCTM</span>
             </div>
             <p style={{ fontSize: '0.875rem', color: 'var(--text-3)', lineHeight: 1.6, maxWidth: 220 }}>
@@ -65,7 +67,7 @@ export default function Footer() {
               Acceso
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              <a href="https://sipctm.netlify.app" target="_blank" rel="noopener noreferrer"
+              <a href={SYSTEM_URL} target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: '0.875rem', color: 'var(--text-3)', transition: 'color 0.2s' }}
                 onMouseEnter={e => e.target.style.color = 'var(--text-2)'}
                 onMouseLeave={e => e.target.style.color = 'var(--text-3)'}

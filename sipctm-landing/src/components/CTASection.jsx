@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { Zap, MessageCircle } from 'lucide-react';
+
+const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
 import ToolsParticles from './ToolsParticles';
 
 const DOT_PATTERN = {
@@ -110,12 +112,12 @@ export default function CTASection() {
 
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <a
-                href="https://sipctm.netlify.app"
+                href={SYSTEM_URL}
                 target="_blank" rel="noopener noreferrer"
                 className="btn btn-primary"
                 style={{ fontSize: '1.0625rem', padding: '1rem 2.25rem' }}
               >
-                Empezar gratis ahora
+                Empezar gratis ahora →
               </a>
               <a
                 href="https://wa.me/5491155773344?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20SIPCTM"

@@ -9,6 +9,8 @@ const NAV_LINKS = [
   { label: 'Cómo funciona', href: '#how-it-works'},
 ];
 
+const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
+
 export default function Navbar({ isDark, toggleTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -62,7 +64,7 @@ export default function Navbar({ isDark, toggleTheme }) {
           href="#"
           style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, marginRight: 'auto' }}
         >
-          <LogoSVG size={30} />
+          <LogoSVG size={36} />
           <span style={{
             fontWeight: 700, fontSize: 16, color: textColor,
             letterSpacing: '0.04em',
@@ -123,7 +125,7 @@ export default function Navbar({ isDark, toggleTheme }) {
           </button>
 
           <a
-            href="https://sipctm.netlify.app"
+            href={SYSTEM_URL}
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: 14, fontWeight: 500, color: text2Color, transition: 'color 0.15s' }}
@@ -134,7 +136,7 @@ export default function Navbar({ isDark, toggleTheme }) {
           </a>
 
           <a
-            href="https://sipctm.netlify.app"
+            href={SYSTEM_URL}
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -242,7 +244,7 @@ export default function Navbar({ isDark, toggleTheme }) {
             {/* CTAs mobile */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               <a
-                href="https://sipctm.netlify.app"
+                href={SYSTEM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -254,7 +256,7 @@ export default function Navbar({ isDark, toggleTheme }) {
                 Iniciar sesión
               </a>
               <a
-                href="https://sipctm.netlify.app"
+                href={SYSTEM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

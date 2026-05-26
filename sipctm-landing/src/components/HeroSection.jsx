@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { ArrowDown, Zap, Users } from 'lucide-react';
 import LogoSVG from './LogoSVG';
 
+const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
+
 const TYPEWRITER_TEXT = 'Gestioná tu taller mecánico con inteligencia';
 const TYPEWRITER_DELAY = 40;
 
@@ -92,7 +94,7 @@ export default function HeroSection({ isDark }) {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <LogoSVG size={72} />
+          <LogoSVG size={80} />
         </motion.div>
 
         <motion.div
@@ -166,13 +168,13 @@ export default function HeroSection({ isDark }) {
           style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}
         >
           <a
-            href="https://sipctm.netlify.app"
+            href={SYSTEM_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-primary"
             style={{ fontSize: '1rem', padding: '0.875rem 2rem' }}
           >
-            Empezar gratis
+            Empezar gratis →
           </a>
           <a
             href="#how-it-works"
