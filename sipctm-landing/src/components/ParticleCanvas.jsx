@@ -1,188 +1,174 @@
 import { useEffect, useRef } from 'react';
 
-const PARTICLE_COUNT = 150;
-const CONNECT_DIST = 120;
-const FLEE_RADIUS = 80;
-
-function hexagonPoints(cx, cy, r, count) {
-  const pts = [];
-  for (let i = 0; i < count; i++) {
-    const a = (Math.PI / 3) * (i % 6) - Math.PI / 6;
-    const scale = Math.random() * r * 0.5 + r * 0.5;
-    pts.push({ x: cx + Math.cos(a) * scale, y: cy + Math.sin(a) * scale });
-  }
-  return pts;
-}
-
-export default function ParticleCanvas() {
+export default function ParticleCanvas({ isDark }) {
   const canvasRef = useRef(null);
-  const particles = useRef([]);
-  const mouse = useRef({ x: -9999, y: -9999 });
-  const raf = useRef(null);
-  const gravityTimer = useRef(null);
-  const isGravity = useRef(false);
-  const targets = useRef([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
+    let animId;
+    const mouse = { x: -9999, y: -9999 };
 
-    function resize() {
-      canvas.width = window.innerWidth;
+    const resize = () => {
+      canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
-    }
+    };
     resize();
     window.addEventListener('resize', resize);
 
-    function initParticles() {
-      particles.current = Array.from({ length: PARTICLE_COUNT }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.6,
-        vy: (Math.random() - 0.5) * 0.6,
-        size: Math.random() * 1.5 + 0.5,
-        type: Math.floor(Math.random() * 3), // 0=dot, 1=mini-hex, 2=cross
-        opacity: Math.random() * 0.4 + 0.2,
-      }));
-    }
-    initParticles();
+    const onMouseMove = (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    };
+    window.addEventListener('mousemove', onMouseMove);
 
-    function drawParticle(p) {
-      ctx.globalAlpha = p.opacity;
-      ctx.fillStyle = `rgba(59,107,200,0.8)`;
-      ctx.strokeStyle = `rgba(59,107,200,0.8)`;
+    const PARTICLE_COUNT = 150;
+    const COLOR_BASE = isDark
+      ? 'rgba(59, 107, 200,'
+      : 'rgba(30, 58, 110,';
 
-      if (p.type === 0) {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fill();
-      } else if (p.type === 1) {
-        ctx.beginPath();
-        for (let i = 0; i < 6; i++) {
-          const a = (Math.PI / 3) * i;
-          const r = p.size * 2;
-          if (i === 0) ctx.moveTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r);
-          else ctx.lineTo(p.x + Math.cos(a) * r, p.y + Math.sin(a) * r);
-        }
-        ctx.closePath();
-        ctx.strokeStyle = `rgba(59,107,200,0.6)`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      } else {
-        const s = p.size * 2.5;
-        ctx.lineWidth = 0.7;
-        ctx.beginPath();
-        ctx.moveTo(p.x - s, p.y); ctx.lineTo(p.x + s, p.y);
-        ctx.moveTo(p.x, p.y - s); ctx.lineTo(p.x, p.y + s);
-        ctx.stroke();
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
+      x:      Math.random() * window.innerWidth,
+      y:      Math.random() * window.innerHeight,
+      vx:     (Math.random() - 0.5) * 0.4,
+      vy:     (Math.random() - 0.5) * 0.4,
+      r:      1 + Math.random() * 2.5,
+      opacity: 0.2 + Math.random() * 0.5,
+      type:   Math.floor(Math.random() * 3), // 0=círculo, 1=mini hex, 2=cruz
+    }));
+
+    const drawHex = (x, y, r) => {
+      ctx.beginPath();
+      for (let i = 0; i < 6; i++) {
+        const angle = (Math.PI / 3) * i - Math.PI / 6;
+        const px = x + r * Math.cos(angle);
+        const py = y + r * Math.sin(angle);
+        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
       }
-      ctx.globalAlpha = 1;
-    }
+      ctx.closePath();
+    };
 
-    function tick() {
+    const drawCross = (x, y, r) => {
+      ctx.beginPath();
+      ctx.moveTo(x - r, y); ctx.lineTo(x + r, y);
+      ctx.moveTo(x, y - r); ctx.lineTo(x, y + r);
+    };
+
+    let lastHexTime = Date.now();
+    let hexActive   = false;
+    let hexProgress = 0;
+
+    const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const mx = mouse.current.x;
-      const my = mouse.current.y;
-      const ps = particles.current;
 
-      for (let i = 0; i < ps.length; i++) {
-        const p = ps[i];
+      const now = Date.now();
+      if (now - lastHexTime > 8000) {
+        hexActive    = true;
+        hexProgress  = 0;
+        lastHexTime  = now;
+      }
+      if (hexActive) {
+        hexProgress += 0.008;
+        if (hexProgress >= 1) { hexActive = false; hexProgress = 0; }
+      }
 
-        if (isGravity.current && targets.current[i]) {
-          const tx = targets.current[i].x;
-          const ty = targets.current[i].y;
-          p.vx += (tx - p.x) * 0.003;
-          p.vy += (ty - p.y) * 0.003;
+      const cx   = canvas.width  / 2;
+      const cy   = canvas.height / 2;
+      const hexR = Math.min(canvas.width, canvas.height) * 0.25;
+
+      particles.forEach((p, i) => {
+        // Target para gravedad hexagonal
+        const angle = (Math.PI * 2 / PARTICLE_COUNT) * i - Math.PI / 6;
+        const snap  = hexActive ? hexProgress : 0;
+        const tx    = cx + hexR * Math.cos(angle);
+        const ty    = cy + hexR * Math.sin(angle);
+
+        p.x += p.vx + (tx - p.x) * snap * 0.015;
+        p.y += p.vy + (ty - p.y) * snap * 0.015;
+
+        // Repulsión del cursor
+        const dx   = p.x - mouse.x;
+        const dy   = p.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 80 && dist > 0) {
+          const force = (80 - dist) / 80;
+          p.x += dx * force * 0.08;
+          p.y += dy * force * 0.08;
+        }
+
+        // Wrap en bordes
+        if (p.x < 0)             p.x = canvas.width;
+        if (p.x > canvas.width)  p.x = 0;
+        if (p.y < 0)             p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Iluminar si está cerca del cursor
+        const nearMouse = dist < 120;
+        const alpha     = nearMouse ? Math.min(p.opacity + 0.4, 1) : p.opacity;
+
+        ctx.strokeStyle = `${COLOR_BASE}${alpha})`;
+        ctx.fillStyle   = `${COLOR_BASE}${alpha})`;
+        ctx.lineWidth   = 1;
+
+        if (p.type === 0) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+        } else if (p.type === 1) {
+          drawHex(p.x, p.y, p.r + 1);
+          ctx.stroke();
         } else {
-          // Mouse flee
-          const dx = p.x - mx;
-          const dy = p.y - my;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < FLEE_RADIUS) {
-            const force = (FLEE_RADIUS - dist) / FLEE_RADIUS;
-            p.vx += (dx / dist) * force * 1.5;
-            p.vy += (dy / dist) * force * 1.5;
-          }
+          drawCross(p.x, p.y, p.r + 1);
+          ctx.stroke();
         }
+      });
 
-        p.vx *= 0.98;
-        p.vy *= 0.98;
-        p.x += p.vx;
-        p.y += p.vy;
-
-        // Bounce
-        if (p.x < 0) { p.x = 0; p.vx *= -1; }
-        if (p.x > canvas.width) { p.x = canvas.width; p.vx *= -1; }
-        if (p.y < 0) { p.y = 0; p.vy *= -1; }
-        if (p.y > canvas.height) { p.y = canvas.height; p.vy *= -1; }
-
-        drawParticle(p);
-
-        // Connect nearby
-        for (let j = i + 1; j < ps.length; j++) {
-          const q = ps[j];
-          const dx2 = p.x - q.x;
-          const dy2 = p.y - q.y;
-          const d = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-          if (d < CONNECT_DIST) {
-            ctx.globalAlpha = (1 - d / CONNECT_DIST) * 0.25;
-            ctx.strokeStyle = 'rgba(59,107,200,0.8)';
-            ctx.lineWidth = 0.5;
+      // Líneas de conexión entre partículas cercanas
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const d  = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) {
             ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `${COLOR_BASE}${(1 - d / 120) * 0.18})`;
+            ctx.lineWidth   = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
-            ctx.globalAlpha = 1;
           }
         }
       }
 
-      raf.current = requestAnimationFrame(tick);
-    }
-
-    tick();
-
-    // Gravity cycle every 8s
-    function triggerGravity() {
-      const cx = canvas.width / 2;
-      const cy = canvas.height / 2;
-      targets.current = hexagonPoints(cx, cy, 120, PARTICLE_COUNT);
-      isGravity.current = true;
-      setTimeout(() => { isGravity.current = false; }, 2000);
-    }
-
-    gravityTimer.current = setInterval(triggerGravity, 8000);
-
-    const onMove = e => {
-      mouse.current = { x: e.clientX, y: e.clientY };
-    };
-    const onVisibility = () => {
-      if (document.hidden) {
-        cancelAnimationFrame(raf.current);
-      } else {
-        tick();
-      }
+      animId = requestAnimationFrame(animate);
     };
 
-    window.addEventListener('mousemove', onMove);
-    document.addEventListener('visibilitychange', onVisibility);
+    const onVis = () => {
+      if (document.hidden) cancelAnimationFrame(animId);
+      else animId = requestAnimationFrame(animate);
+    };
+    document.addEventListener('visibilitychange', onVis);
+
+    animId = requestAnimationFrame(animate);
 
     return () => {
-      cancelAnimationFrame(raf.current);
-      clearInterval(gravityTimer.current);
+      cancelAnimationFrame(animId);
       window.removeEventListener('resize', resize);
-      window.removeEventListener('mousemove', onMove);
-      document.removeEventListener('visibilitychange', onVisibility);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('visibilitychange', onVis);
     };
-  }, []);
+  }, [isDark]);
 
   return (
     <canvas
       ref={canvasRef}
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
-        zIndex: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 2,
         pointerEvents: 'none',
       }}
     />

@@ -3,7 +3,6 @@ import './styles/global.css';
 import { useTheme } from './hooks/useTheme';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
-import ParticleCanvas from './components/ParticleCanvas';
 import HeroSection from './components/HeroSection';
 import ProblemSection from './components/ProblemSection';
 import FeaturesSection from './components/FeaturesSection';
@@ -16,6 +15,7 @@ import Footer from './components/Footer';
 export default function App() {
   const { theme, toggleTheme } = useTheme();
   const [loaded, setLoaded] = useState(false);
+  const isDark = theme === 'dark';
 
   return (
     <>
@@ -23,10 +23,9 @@ export default function App() {
 
       {loaded && (
         <>
-          <ParticleCanvas />
           <Navbar theme={theme} onToggleTheme={toggleTheme} />
           <main style={{ position: 'relative', zIndex: 1 }}>
-            <HeroSection />
+            <HeroSection isDark={isDark} />
             <ProblemSection />
             <FeaturesSection />
             <HowItWorksSection />

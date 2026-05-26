@@ -1,15 +1,32 @@
 import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { Zap } from 'lucide-react';
+
+const DOT_PATTERN = {
+  backgroundImage: 'radial-gradient(circle, rgba(59,107,200,0.55) 1px, transparent 1px)',
+  backgroundSize: '22px 22px',
+};
 
 export default function CTASection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
+
+  const maskImage = useMotionTemplate`radial-gradient(280px circle at ${mouseX}px ${mouseY}px, black 0%, transparent 100%)`;
+
   return (
     <section className="section" ref={ref}>
       <div className="container">
         <motion.div
+          onMouseMove={handleMouseMove}
           initial={{ opacity: 0, y: 24, scale: 0.97 }}
           animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
           transition={{ duration: 0.65 }}
@@ -22,7 +39,33 @@ export default function CTASection() {
             borderColor: 'rgba(59,107,200,0.35)',
           }}
         >
-          {/* Glow blob */}
+          {/* Dot pattern base — siempre visible */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              ...DOT_PATTERN,
+              opacity: 0.25,
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Dot pattern iluminado — sigue el cursor con mask */}
+          <motion.div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              backgroundImage: 'radial-gradient(circle, rgba(91,143,232,0.7) 1px, transparent 1px)',
+              backgroundSize: '22px 22px',
+              WebkitMaskImage: maskImage,
+              maskImage,
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Glow blob central */}
           <div
             style={{
               position: 'absolute',
@@ -34,9 +77,11 @@ export default function CTASection() {
               borderRadius: '50%',
               background: 'radial-gradient(circle, rgba(59,107,200,0.18) 0%, transparent 70%)',
               pointerEvents: 'none',
+              zIndex: 0,
             }}
           />
 
+          {/* Contenido */}
           <div style={{ position: 'relative', zIndex: 1 }}>
             <div
               style={{
@@ -63,7 +108,6 @@ export default function CTASection() {
                 fontSize: 'clamp(1.75rem, 4vw, 3rem)',
                 fontWeight: 800,
                 lineHeight: 1.2,
-                marginBottom: '1.25rem',
                 maxWidth: 600,
                 margin: '0 auto 1.25rem',
               }}

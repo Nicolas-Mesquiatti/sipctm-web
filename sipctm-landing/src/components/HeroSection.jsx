@@ -1,17 +1,16 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowDown, Zap, Users } from 'lucide-react';
 import LogoSVG from './LogoSVG';
+import ParticleCanvas from './ParticleCanvas';
 
 const TYPEWRITER_TEXT = 'Gestioná tu taller mecánico con inteligencia';
 const TYPEWRITER_DELAY = 40;
 
-export default function HeroSection() {
+export default function HeroSection({ isDark }) {
   const [typed, setTyped] = useState('');
   const [showCursor, setShowCursor] = useState(true);
-  const videoRef = useRef(null);
 
-  // Typewriter
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -22,7 +21,6 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, []);
 
-  // Blink cursor
   useEffect(() => {
     const interval = setInterval(() => setShowCursor(v => !v), 530);
     return () => clearInterval(interval);
@@ -40,39 +38,43 @@ export default function HeroSection() {
         paddingTop: 80,
       }}
     >
-      {/* Background video */}
+      {/* z-index 0 — Video fondo */}
       <video
-        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        src="/tools-video.mp4"
         style={{
           position: 'absolute',
           inset: 0,
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: 'var(--hero-video-opacity, 0.12)',
+          opacity: isDark ? 0.15 : 0.05,
+          zIndex: 0,
+          pointerEvents: 'none',
+        }}
+      >
+        <source src="/tools-video.mp4" type="video/mp4" />
+      </video>
+
+      {/* z-index 1 — Overlay oscuro/claro */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: isDark
+            ? 'rgba(6,8,16,0.72)'
+            : 'rgba(240,244,255,0.88)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
       />
 
-      {/* Gradient overlay */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse 80% 60% at 50% 40%, rgba(59,107,200,0.12) 0%, transparent 70%)',
-          zIndex: 2,
-          pointerEvents: 'none',
-        }}
-      />
+      {/* z-index 2 — Partículas (canvas absolute dentro del hero) */}
+      <ParticleCanvas isDark={isDark} />
 
-      {/* Content */}
+      {/* z-index 3 — Contenido centrado */}
       <div
         className="container"
         style={{
@@ -85,7 +87,6 @@ export default function HeroSection() {
           gap: '2rem',
         }}
       >
-        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -94,7 +95,6 @@ export default function HeroSection() {
           <LogoSVG size={72} />
         </motion.div>
 
-        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,7 +117,6 @@ export default function HeroSection() {
           Sistema de gestión para talleres mecánicos
         </motion.div>
 
-        {/* Title typewriter */}
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -145,7 +144,6 @@ export default function HeroSection() {
           />
         </motion.h1>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -160,7 +158,6 @@ export default function HeroSection() {
           Controlá órdenes de trabajo, stock, clientes y presupuestos desde un solo lugar. Diseñado para talleres que quieren crecer.
         </motion.p>
 
-        {/* CTA buttons */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -181,7 +178,6 @@ export default function HeroSection() {
           </a>
         </motion.div>
 
-        {/* Social proof */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -193,7 +189,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* Bounce arrow */}
+      {/* Flecha rebotando */}
       <motion.a
         href="#problem"
         animate={{ y: [0, 8, 0] }}
@@ -213,11 +209,6 @@ export default function HeroSection() {
       >
         <ArrowDown size={20} />
       </motion.a>
-
-      <style>{`
-        [data-theme="dark"] { --hero-video-opacity: 0.12; }
-        [data-theme="light"] { --hero-video-opacity: 0.05; }
-      `}</style>
     </section>
   );
 }
