@@ -2,7 +2,7 @@ export default function LogoSVG({ size = 32 }) {
   return (
     <div
       style={{
-        background: 'rgba(6,8,16,0.07)',
+        background: 'rgba(87,56,33,0.07)',
         borderRadius: 8,
         padding: 3,
         display: 'inline-flex',

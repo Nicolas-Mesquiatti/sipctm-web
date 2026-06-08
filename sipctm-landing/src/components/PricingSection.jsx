@@ -112,16 +112,16 @@ function PricingCard({ plan, index, inView, weekly }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.13 }}
-      whileHover={{ y: -5, boxShadow: plan.featured ? '0 20px 56px rgba(59,107,200,0.28)' : '0 10px 32px rgba(59,107,200,0.12)' }}
+      whileHover={{ y: -5, boxShadow: plan.featured ? '0 20px 56px rgba(136,90,57,0.28)' : '0 10px 32px rgba(136,90,57,0.12)' }}
       style={{
         position: 'relative',
         borderRadius: 18,
         padding: '2rem 1.75rem',
-        background: plan.featured ? 'rgba(59,107,200,0.07)' : 'rgba(255,255,255,0.03)',
+        background: plan.featured ? 'rgba(136,90,57,0.07)' : 'rgba(136,90,57,0.03)',
         border: plan.featured
-          ? '1px solid rgba(91,143,232,0.5)'
-          : '1px solid rgba(59,107,200,0.12)',
-        boxShadow: plan.featured ? '0 0 30px rgba(59,107,200,0.18)' : 'none',
+          ? '1px solid rgba(194,160,110,0.5)'
+          : '1px solid rgba(136,90,57,0.14)',
+        boxShadow: plan.featured ? '0 0 30px rgba(136,90,57,0.15)' : 'none',
         transform: plan.featured ? 'scale(1.02)' : 'scale(1)',
         display: 'flex',
         flexDirection: 'column',
@@ -131,19 +131,19 @@ function PricingCard({ plan, index, inView, weekly }) {
       {/* Pulsing glow border for featured */}
       {plan.featured && (
         <motion.div
-          animate={{ boxShadow: ['0 0 0px rgba(59,107,200,0)', '0 0 36px rgba(59,107,200,0.45)', '0 0 0px rgba(59,107,200,0)'] }}
+          animate={{ boxShadow: ['0 0 0px rgba(136,90,57,0)', '0 0 36px rgba(136,90,57,0.4)', '0 0 0px rgba(136,90,57,0)'] }}
           transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ position: 'absolute', inset: 0, borderRadius: 18, border: '1px solid rgba(91,143,232,0.45)', pointerEvents: 'none' }}
+          style={{ position: 'absolute', inset: 0, borderRadius: 18, border: '1px solid rgba(194,160,110,0.4)', pointerEvents: 'none' }}
         />
       )}
 
       <div style={{ position: 'relative', zIndex: 1, display: 'flex', flexDirection: 'column', flex: 1 }}>
-        {/* Badge MÁS POPULAR — dentro del flujo, no absolute */}
+        {/* Badge MÁS POPULAR — dentro del flujo */}
         {plan.badge && (
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 5,
-            background: 'linear-gradient(90deg, #3B6BC8, #5B8FE8)',
-            color: 'white', fontSize: 11, fontWeight: 700,
+            background: 'linear-gradient(90deg, #885A39, #C2A06E)',
+            color: '#FDF7EB', fontSize: 11, fontWeight: 700,
             letterSpacing: '0.06em', padding: '4px 12px',
             borderRadius: 99, marginBottom: 12, alignSelf: 'flex-start',
           }}>
@@ -153,7 +153,7 @@ function PricingCard({ plan, index, inView, weekly }) {
 
         {/* Tag — solo si no hay badge */}
         {!plan.badge && (
-          <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--blue-circuit)', marginBottom: '0.4rem' }}>
+          <p style={{ fontSize: '0.7rem', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--blue-main)', marginBottom: '0.4rem' }}>
             {plan.tag}
           </p>
         )}
@@ -172,7 +172,7 @@ function PricingCard({ plan, index, inView, weekly }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.18 }}
-              style={{ fontSize: '2.25rem', fontWeight: 800, color: plan.featured ? 'var(--blue-circuit)' : 'var(--text)' }}
+              style={{ fontSize: '2.25rem', fontWeight: 800, color: plan.featured ? 'var(--blue-main)' : 'var(--text)' }}
             >
               <AnimatedPrice target={price} inView={inView} />
             </motion.span>
@@ -188,7 +188,7 @@ function PricingCard({ plan, index, inView, weekly }) {
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.55rem', marginBottom: '1.75rem', flex: 1 }}>
           {plan.features.map((f, fi) => (
             <li key={fi} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.55rem', fontSize: '0.875rem' }}>
-              <span style={{ color: 'var(--blue-circuit)', flexShrink: 0, marginTop: '0.1rem', fontSize: '0.85rem' }}>✦</span>
+              <span style={{ color: 'var(--blue-main)', flexShrink: 0, marginTop: '0.1rem', fontSize: '0.85rem' }}>✦</span>
               <span style={{ color: 'var(--text-2)', lineHeight: 1.5 }}>{f}</span>
             </li>
           ))}
@@ -203,18 +203,18 @@ function PricingCard({ plan, index, inView, weekly }) {
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             gap: 8, width: '100%', padding: '12px',
             borderRadius: 8, textDecoration: 'none',
-            background: plan.featured ? '#3B6BC8' : 'transparent',
-            border: plan.featured ? 'none' : '1px solid rgba(59,107,200,0.4)',
-            color: plan.featured ? 'white' : '#5B8FE8',
+            background: plan.featured ? '#885A39' : 'transparent',
+            border: plan.featured ? 'none' : '1px solid rgba(136,90,57,0.4)',
+            color: plan.featured ? '#FDF7EB' : '#885A39',
             fontSize: 14, fontWeight: 600,
             transition: 'all 0.2s',
           }}
           onMouseEnter={e => {
-            e.currentTarget.style.background = plan.featured ? '#4E7ED6' : 'rgba(59,107,200,0.08)';
+            e.currentTarget.style.background = plan.featured ? '#A06B45' : 'rgba(136,90,57,0.08)';
             e.currentTarget.style.transform = 'translateY(-1px)';
           }}
           onMouseLeave={e => {
-            e.currentTarget.style.background = plan.featured ? '#3B6BC8' : 'transparent';
+            e.currentTarget.style.background = plan.featured ? '#885A39' : 'transparent';
             e.currentTarget.style.transform = '';
           }}
         >
@@ -257,15 +257,15 @@ export default function PricingSection() {
             {/* Toggle mensual / semanal */}
             <div style={{
               display: 'inline-flex', alignItems: 'center',
-              background: 'rgba(59,107,200,0.07)', border: '1px solid rgba(59,107,200,0.15)',
+              background: 'rgba(136,90,57,0.07)', border: '1px solid rgba(136,90,57,0.18)',
               borderRadius: 99, padding: '0.3rem 0.4rem',
             }}>
               <button
                 onClick={() => setWeekly(false)}
                 style={{
                   padding: '0.4rem 1.1rem', borderRadius: 99, border: 'none', cursor: 'pointer',
-                  background: !weekly ? '#3B6BC8' : 'transparent',
-                  color: !weekly ? '#fff' : 'var(--text-3)',
+                  background: !weekly ? '#885A39' : 'transparent',
+                  color: !weekly ? '#FDF7EB' : 'var(--text-3)',
                   fontSize: '0.8125rem', fontWeight: 600, transition: 'all 0.2s',
                 }}
               >
@@ -275,8 +275,8 @@ export default function PricingSection() {
                 onClick={() => setWeekly(true)}
                 style={{
                   padding: '0.4rem 1.1rem', borderRadius: 99, border: 'none', cursor: 'pointer',
-                  background: weekly ? '#3B6BC8' : 'transparent',
-                  color: weekly ? '#fff' : 'var(--text-3)',
+                  background: weekly ? '#885A39' : 'transparent',
+                  color: weekly ? '#FDF7EB' : 'var(--text-3)',
                   fontSize: '0.8125rem', fontWeight: 600, transition: 'all 0.2s',
                 }}
               >
@@ -295,7 +295,6 @@ export default function PricingSection() {
             ))}
           </div>
 
-          {/* Disclaimer */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}

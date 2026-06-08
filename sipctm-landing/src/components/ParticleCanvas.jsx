@@ -25,8 +25,8 @@ export default function ParticleCanvas({ isDark }) {
 
     const PARTICLE_COUNT = 150;
     const COLOR_BASE = isDark
-      ? 'rgba(59, 107, 200,'
-      : 'rgba(30, 58, 110,';
+      ? 'rgba(136, 90, 57,'
+      : 'rgba(87, 56, 33,';
 
     const particles = Array.from({ length: PARTICLE_COUNT }, () => ({
       x:      Math.random() * window.innerWidth,
@@ -35,7 +35,7 @@ export default function ParticleCanvas({ isDark }) {
       vy:     (Math.random() - 0.5) * 0.4,
       r:      1 + Math.random() * 2.5,
       opacity: 0.2 + Math.random() * 0.5,
-      type:   Math.floor(Math.random() * 3), // 0=círculo, 1=mini hex, 2=cruz
+      type:   Math.floor(Math.random() * 3),
     }));
 
     const drawHex = (x, y, r) => {
@@ -78,7 +78,6 @@ export default function ParticleCanvas({ isDark }) {
       const hexR = Math.min(canvas.width, canvas.height) * 0.25;
 
       particles.forEach((p, i) => {
-        // Target para gravedad hexagonal
         const angle = (Math.PI * 2 / PARTICLE_COUNT) * i - Math.PI / 6;
         const snap  = hexActive ? hexProgress : 0;
         const tx    = cx + hexR * Math.cos(angle);
@@ -87,7 +86,6 @@ export default function ParticleCanvas({ isDark }) {
         p.x += p.vx + (tx - p.x) * snap * 0.015;
         p.y += p.vy + (ty - p.y) * snap * 0.015;
 
-        // Repulsión del cursor
         const dx   = p.x - mouse.x;
         const dy   = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
@@ -97,13 +95,11 @@ export default function ParticleCanvas({ isDark }) {
           p.y += dy * force * 0.08;
         }
 
-        // Wrap en bordes
         if (p.x < 0)             p.x = canvas.width;
         if (p.x > canvas.width)  p.x = 0;
         if (p.y < 0)             p.y = canvas.height;
         if (p.y > canvas.height) p.y = 0;
 
-        // Iluminar si está cerca del cursor
         const nearMouse = dist < 120;
         const alpha     = nearMouse ? Math.min(p.opacity + 0.4, 1) : p.opacity;
 
@@ -124,7 +120,6 @@ export default function ParticleCanvas({ isDark }) {
         }
       });
 
-      // Líneas de conexión entre partículas cercanas
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;

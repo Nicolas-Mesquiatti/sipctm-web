@@ -1,12 +1,12 @@
 import { useRef } from 'react';
 import { motion, useInView, useMotionValue, useMotionTemplate } from 'framer-motion';
 import { Zap, MessageCircle } from 'lucide-react';
-
-const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
 import ToolsParticles from './ToolsParticles';
 
+const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
+
 const DOT_PATTERN = {
-  backgroundImage: 'radial-gradient(circle, rgba(59,107,200,0.55) 1px, transparent 1px)',
+  backgroundImage: 'radial-gradient(circle, rgba(136,90,57,0.55) 1px, transparent 1px)',
   backgroundSize: '22px 22px',
 };
 
@@ -44,8 +44,8 @@ export default function CTASection() {
             position: 'relative',
             overflow: 'hidden',
             borderRadius: 20,
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(59,107,200,0.35)',
+            background: 'rgba(136,90,57,0.04)',
+            border: '1px solid rgba(136,90,57,0.3)',
           }}
         >
           {/* Dot pattern base */}
@@ -55,7 +55,7 @@ export default function CTASection() {
           <motion.div
             style={{
               position: 'absolute', inset: 0,
-              backgroundImage: 'radial-gradient(circle, rgba(91,143,232,0.7) 1px, transparent 1px)',
+              backgroundImage: 'radial-gradient(circle, rgba(194,160,110,0.7) 1px, transparent 1px)',
               backgroundSize: '22px 22px',
               WebkitMaskImage: maskImage,
               maskImage,
@@ -70,7 +70,7 @@ export default function CTASection() {
               position: 'absolute', top: '50%', left: '50%',
               transform: 'translate(-50%, -50%)',
               width: 400, height: 400, borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(59,107,200,0.18) 0%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(136,90,57,0.15) 0%, transparent 70%)',
               pointerEvents: 'none', zIndex: 0,
             }}
           />
@@ -80,9 +80,9 @@ export default function CTASection() {
               style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                 padding: '0.35rem 1rem', borderRadius: 999,
-                background: 'rgba(59,107,200,0.12)',
-                border: '1px solid rgba(59,107,200,0.25)',
-                fontSize: '0.8125rem', fontWeight: 600, color: 'var(--blue-circuit)',
+                background: 'rgba(136,90,57,0.1)',
+                border: '1px solid rgba(136,90,57,0.25)',
+                fontSize: '0.8125rem', fontWeight: 600, color: 'var(--blue-main)',
                 marginBottom: '1.5rem', letterSpacing: '0.06em',
               }}
             >

@@ -52,10 +52,10 @@ export default function HeroSection({ isDark }) {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          opacity: isDark ? 0.35 : 0.22,
+          opacity: isDark ? 0.3 : 0.2,
           filter: isDark
-            ? 'brightness(0.6) saturate(0.8)'
-            : 'brightness(1.1) saturate(0.6) sepia(0.15)',
+            ? 'brightness(0.6) saturate(0.7) sepia(0.2)'
+            : 'brightness(1.05) saturate(0.6) sepia(0.25)',
           zIndex: 0,
           pointerEvents: 'none',
         }}
@@ -69,8 +69,8 @@ export default function HeroSection({ isDark }) {
           position: 'absolute',
           inset: 0,
           background: isDark
-            ? 'linear-gradient(to bottom, rgba(6,8,16,0.5) 0%, rgba(6,8,16,0.75) 70%, rgba(6,8,16,1) 100%)'
-            : 'linear-gradient(to bottom, rgba(237,241,250,0.55) 0%, rgba(237,241,250,0.82) 70%, rgba(237,241,250,1) 100%)',
+            ? 'linear-gradient(to bottom, rgba(15,10,6,0.4) 0%, rgba(15,10,6,0.75) 70%, rgba(15,10,6,1) 100%)'
+            : 'linear-gradient(to bottom, rgba(253,247,235,0.3) 0%, rgba(253,247,235,0.82) 70%, rgba(253,247,235,1) 100%)',
           zIndex: 1,
           pointerEvents: 'none',
         }}
@@ -107,11 +107,11 @@ export default function HeroSection({ isDark }) {
             gap: '0.5rem',
             padding: '0.35rem 1rem',
             borderRadius: 999,
-            background: 'rgba(59,107,200,0.1)',
-            border: '1px solid rgba(59,107,200,0.25)',
+            background: 'rgba(136,90,57,0.1)',
+            border: '1px solid rgba(136,90,57,0.25)',
             fontSize: '0.8125rem',
             fontWeight: 600,
-            color: 'var(--blue-circuit)',
+            color: 'var(--blue-main)',
             letterSpacing: '0.06em',
           }}
         >
@@ -206,7 +206,7 @@ export default function HeroSection({ isDark }) {
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 2,
-          color: 'var(--text-3)',
+          color: 'var(--blue-main)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

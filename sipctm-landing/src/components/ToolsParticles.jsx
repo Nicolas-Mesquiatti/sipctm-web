@@ -55,7 +55,6 @@ export default function ToolsParticles() {
     }));
 
     const drawTool = (tool) => {
-      // Lee el tema actual del DOM en cada frame → sin prop drilling
       const isDarkMode = document.documentElement.getAttribute('data-theme') !== 'light';
 
       const { x, y, size, opacity, rotation, type } = tool;
@@ -67,7 +66,7 @@ export default function ToolsParticles() {
       const nearAlpha = isDarkMode ? Math.min(opacity * 4, 0.35) : Math.min(opacity * 4, 0.25);
       const alpha = dist < 100 ? nearAlpha : baseAlpha;
 
-      const color = isDarkMode ? '59, 107, 200' : '30, 58, 110';
+      const color = isDarkMode ? '136, 90, 57' : '87, 56, 33';
 
       ctx.save();
       ctx.translate(x, y);

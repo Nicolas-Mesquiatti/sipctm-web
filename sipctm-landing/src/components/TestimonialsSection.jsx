@@ -69,7 +69,7 @@ export default function TestimonialsSection() {
               >
                 <div style={{ display: 'flex', gap: '0.2rem', marginBottom: '1rem' }}>
                   {Array.from({ length: t.stars }).map((_, si) => (
-                    <Star key={si} size={14} fill="var(--blue-main)" color="var(--blue-main)" />
+                    <Star key={si} size={14} fill="var(--blue-light)" color="var(--blue-light)" />
                   ))}
                 </div>
                 <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.7, marginBottom: '1.25rem' }}>
@@ -79,10 +79,10 @@ export default function TestimonialsSection() {
                   <div
                     style={{
                       width: 40, height: 40, borderRadius: '50%',
-                      background: 'rgba(59,107,200,0.15)',
-                      border: '1.5px solid rgba(59,107,200,0.3)',
+                      background: 'rgba(136,90,57,0.15)',
+                      border: '1.5px solid rgba(136,90,57,0.3)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '0.8125rem', fontWeight: 700, color: 'var(--blue-circuit)', flexShrink: 0,
+                      fontSize: '0.8125rem', fontWeight: 700, color: 'var(--blue-main)', flexShrink: 0,
                     }}
                   >
                     {t.initials}

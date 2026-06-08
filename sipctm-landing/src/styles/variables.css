@@ -1,9 +1,9 @@
 :root {
-  --blue-main:    #3B6BC8;
-  --blue-dark:    #1E3A6E;
-  --blue-light:   #5B8FE8;
-  --blue-tech:    #2D5BB8;
-  --blue-circuit: #7AB0FF;
+  --blue-main:    #885A39;
+  --blue-dark:    #573821;
+  --blue-light:   #C2A06E;
+  --blue-tech:    #885A39;
+  --blue-circuit: #E5CBA8;
 
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
@@ -21,27 +21,27 @@
 }
 
 [data-theme="dark"] {
-  --bg:       #060810;
-  --surface:  #0D1220;
-  --surface-2:#111827;
-  --border:   #1A2540;
-  --text:     #F0F4FF;
-  --text-2:   #7A9ADF;
-  --text-3:   #3A5080;
-  --glow:     rgba(59, 107, 200, 0.35);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(59, 107, 200, 0.15);
+  --bg:       #0F0A06;
+  --surface:  #1A120A;
+  --surface-2:#231810;
+  --border:   #3D2A18;
+  --text:     #FDF7EB;
+  --text-2:   #C2A06E;
+  --text-3:   #8C6D4D;
+  --glow:     rgba(136, 90, 57, 0.3);
+  --glass-bg: rgba(26, 18, 10, 0.7);
+  --glass-border: rgba(136, 90, 57, 0.15);
 }
 
 [data-theme="light"] {
-  --bg:       #EDF1FA;
+  --bg:       #FDF7EB;
   --surface:  #FFFFFF;
-  --surface-2:#E4ECFA;
-  --border:   #C5D5F0;
-  --text:     #0D1A35;
-  --text-2:   #2D5BB8;
-  --text-3:   #6A8ACC;
-  --glow:     rgba(59, 107, 200, 0.15);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-border: rgba(59, 107, 200, 0.22);
+  --surface-2:#FDF7EB;
+  --border:   #E5CBA8;
+  --text:     #573821;
+  --text-2:   #8C6D4D;
+  --text-3:   #A08060;
+  --glow:     rgba(136, 90, 57, 0.15);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(136, 90, 57, 0.12);
 }

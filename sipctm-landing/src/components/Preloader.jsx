@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const LETTERS = ['S', 'I', 'P', 'C', 'T', 'M'];
-const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
 
 export default function Preloader({ onComplete }) {
   const [phase, setPhase] = useState(0);
@@ -43,7 +42,7 @@ export default function Preloader({ onComplete }) {
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           style={{
             position: 'fixed', inset: 0, zIndex: 9999,
-            background: 'var(--bg, #060810)',
+            background: 'var(--bg, #0F0A06)',
             display: 'flex', flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',
             gap: '2rem',
@@ -55,13 +54,13 @@ export default function Preloader({ onComplete }) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             style={{
-              background: 'rgba(6,8,16,0.5)',
+              background: 'rgba(15,10,6,0.6)',
               borderRadius: 16,
               padding: 12,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 0 40px rgba(59,107,200,0.25)',
+              boxShadow: '0 0 40px rgba(136,90,57,0.25)',
             }}
           >
             <img
@@ -81,7 +80,7 @@ export default function Preloader({ onComplete }) {
                 transition={{ delay: i * 0.07, duration: 0.3 }}
                 style={{
                   fontSize: '2rem', fontWeight: 800,
-                  letterSpacing: '0.15em', color: 'var(--text, #F0F4FF)',
+                  letterSpacing: '0.15em', color: 'var(--text, #FDF7EB)',
                 }}
               >
                 {letter}
@@ -90,11 +89,11 @@ export default function Preloader({ onComplete }) {
           </div>
 
           {/* Barra de progreso */}
-          <div style={{ width: 200, height: 3, background: 'var(--border, rgba(59,107,200,0.15))', borderRadius: 999, overflow: 'hidden' }}>
+          <div style={{ width: 200, height: 3, background: 'var(--border, rgba(136,90,57,0.2))', borderRadius: 999, overflow: 'hidden' }}>
             <motion.div
               style={{
                 height: '100%',
-                background: 'linear-gradient(90deg, var(--blue-dark, #1E3A6E), var(--blue-main, #3B6BC8), var(--blue-circuit, #7AB0FF))',
+                background: 'linear-gradient(90deg, var(--blue-dark, #573821), var(--blue-main, #885A39), var(--blue-circuit, #E5CBA8))',
                 borderRadius: 999,
               }}
               animate={{ width: `${progress}%` }}

@@ -4,9 +4,9 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import LogoSVG from './LogoSVG';
 
 const NAV_LINKS = [
-  { label: 'Funciones',     href: '#features'   },
-  { label: 'Precios',       href: '#pricing'     },
-  { label: 'Cómo funciona', href: '#how-it-works'},
+  { label: 'Funciones',     href: '#features'    },
+  { label: 'Precios',       href: '#pricing'      },
+  { label: 'Cómo funciona', href: '#how-it-works' },
 ];
 
 const SYSTEM_URL = 'https://6a133762511ff600078700ce--cosmic-nougat-86afd4.netlify.app/login';
@@ -21,24 +21,23 @@ export default function Navbar({ isDark, toggleTheme }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Bloquear scroll del body cuando el menú mobile está abierto
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
   const navBg = isDark
-    ? scrolled ? 'rgba(6,8,16,0.92)' : 'transparent'
-    : scrolled ? 'rgba(237,241,250,0.95)' : 'rgba(237,241,250,0.8)';
+    ? scrolled ? 'rgba(15,10,6,0.92)' : 'transparent'
+    : scrolled ? 'rgba(253,247,235,0.95)' : 'rgba(253,247,235,0.8)';
 
   const borderColor = isDark
-    ? 'rgba(59,107,200,0.15)'
-    : 'rgba(59,107,200,0.2)';
+    ? 'rgba(136,90,57,0.18)'
+    : 'rgba(136,90,57,0.22)';
 
-  const textColor   = isDark ? '#F0F4FF' : '#0D1A35';
-  const text2Color  = isDark ? '#7A9ADF' : '#2D5BB8';
-  const toggleBg    = isDark ? '#1A2540' : '#C5D5F0';
-  const toggleBdr   = isDark ? '#2D4580' : '#A0BEED';
+  const textColor  = isDark ? '#FDF7EB' : '#573821';
+  const text2Color = isDark ? '#C2A06E' : '#8C6D4D';
+  const toggleBg   = isDark ? '#3D2A18' : '#E5CBA8';
+  const toggleBdr  = isDark ? '#573821' : '#C2A06E';
 
   return (
     <>
@@ -65,10 +64,7 @@ export default function Navbar({ isDark, toggleTheme }) {
           style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0, marginRight: 'auto' }}
         >
           <LogoSVG size={36} />
-          <span style={{
-            fontWeight: 700, fontSize: 16, color: textColor,
-            letterSpacing: '0.04em',
-          }}>
+          <span style={{ fontWeight: 700, fontSize: 16, color: textColor, letterSpacing: '0.04em' }}>
             SIPCTM
           </span>
         </a>
@@ -79,14 +75,7 @@ export default function Navbar({ isDark, toggleTheme }) {
             <a
               key={link.href}
               href={link.href}
-              style={{
-                padding: '6px 14px',
-                fontSize: 14,
-                fontWeight: 500,
-                color: text2Color,
-                borderRadius: 6,
-                transition: 'color 0.15s',
-              }}
+              style={{ padding: '6px 14px', fontSize: 14, fontWeight: 500, color: text2Color, borderRadius: 6, transition: 'color 0.15s' }}
               onMouseEnter={e => e.target.style.color = textColor}
               onMouseLeave={e => e.target.style.color = text2Color}
             >
@@ -103,11 +92,9 @@ export default function Navbar({ isDark, toggleTheme }) {
             aria-label="Cambiar tema"
             style={{
               width: 52, height: 28, borderRadius: 99,
-              background: toggleBg,
-              border: `1px solid ${toggleBdr}`,
+              background: toggleBg, border: `1px solid ${toggleBdr}`,
               position: 'relative', cursor: 'pointer',
-              transition: 'background 0.3s',
-              flexShrink: 0,
+              transition: 'background 0.3s', flexShrink: 0,
             }}
           >
             <motion.div
@@ -116,11 +103,11 @@ export default function Navbar({ isDark, toggleTheme }) {
               style={{
                 position: 'absolute', top: 2,
                 width: 22, height: 22, borderRadius: '50%',
-                background: '#3B6BC8',
+                background: '#885A39',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}
             >
-              {isDark ? <Moon size={11} color="white" /> : <Sun size={11} color="white" />}
+              {isDark ? <Moon size={11} color="#FDF7EB" /> : <Sun size={11} color="#FDF7EB" />}
             </motion.div>
           </button>
 
@@ -141,13 +128,13 @@ export default function Navbar({ isDark, toggleTheme }) {
             rel="noopener noreferrer"
             style={{
               padding: '7px 18px', borderRadius: 8,
-              background: '#3B6BC8', color: 'white',
+              background: '#885A39', color: '#FDF7EB',
               fontSize: 14, fontWeight: 600,
               whiteSpace: 'nowrap',
               transition: 'background 0.2s, transform 0.2s',
             }}
-            onMouseEnter={e => { e.target.style.background = '#5B8FE8'; e.target.style.transform = 'translateY(-1px)'; }}
-            onMouseLeave={e => { e.target.style.background = '#3B6BC8'; e.target.style.transform = ''; }}
+            onMouseEnter={e => { e.target.style.background = '#A06B45'; e.target.style.transform = 'translateY(-1px)'; }}
+            onMouseLeave={e => { e.target.style.background = '#885A39'; e.target.style.transform = ''; }}
           >
             Empezar gratis
           </a>
@@ -178,13 +165,12 @@ export default function Navbar({ isDark, toggleTheme }) {
             transition={{ duration: 0.22, ease: 'easeOut' }}
             style={{
               position: 'fixed', top: 60, left: 0, right: 0, bottom: 0,
-              background: isDark ? '#060810' : '#EDF1FA',
+              background: isDark ? '#0F0A06' : '#FDF7EB',
               zIndex: 999,
               display: 'flex', flexDirection: 'column',
               padding: '24px 24px 32px',
             }}
           >
-            {/* Links */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               {NAV_LINKS.map((link, i) => (
                 <motion.a
@@ -211,8 +197,7 @@ export default function Navbar({ isDark, toggleTheme }) {
             {/* Toggle tema mobile */}
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              padding: '18px 0',
-              borderTop: `1px solid ${borderColor}`,
+              padding: '18px 0', borderTop: `1px solid ${borderColor}`,
             }}>
               <span style={{ fontSize: 15, color: text2Color }}>
                 Modo {isDark ? 'oscuro' : 'claro'}
@@ -221,8 +206,7 @@ export default function Navbar({ isDark, toggleTheme }) {
                 onClick={toggleTheme}
                 style={{
                   width: 52, height: 28, borderRadius: 99,
-                  background: toggleBg,
-                  border: `1px solid ${toggleBdr}`,
+                  background: toggleBg, border: `1px solid ${toggleBdr}`,
                   position: 'relative', cursor: 'pointer',
                 }}
               >
@@ -232,11 +216,11 @@ export default function Navbar({ isDark, toggleTheme }) {
                   style={{
                     position: 'absolute', top: 2,
                     width: 22, height: 22, borderRadius: '50%',
-                    background: '#3B6BC8',
+                    background: '#885A39',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}
                 >
-                  {isDark ? <Moon size={11} color="white" /> : <Sun size={11} color="white" />}
+                  {isDark ? <Moon size={11} color="#FDF7EB" /> : <Sun size={11} color="#FDF7EB" />}
                 </motion.div>
               </button>
             </div>
@@ -249,8 +233,8 @@ export default function Navbar({ isDark, toggleTheme }) {
                 rel="noopener noreferrer"
                 style={{
                   textAlign: 'center', padding: '14px',
-                  borderRadius: 10, border: '2px solid #3B6BC8',
-                  color: '#3B6BC8', fontSize: 16, fontWeight: 600,
+                  borderRadius: 10, border: '2px solid #885A39',
+                  color: '#885A39', fontSize: 16, fontWeight: 600,
                 }}
               >
                 Iniciar sesión
@@ -261,8 +245,8 @@ export default function Navbar({ isDark, toggleTheme }) {
                 rel="noopener noreferrer"
                 style={{
                   textAlign: 'center', padding: '14px',
-                  borderRadius: 10, background: '#3B6BC8',
-                  color: 'white', fontSize: 16, fontWeight: 600,
+                  borderRadius: 10, background: '#885A39',
+                  color: '#FDF7EB', fontSize: 16, fontWeight: 600,
                 }}
               >
                 Empezar gratis →

@@ -61,14 +61,13 @@ export default function ProblemSection() {
                   gap: '0.875rem',
                 }}
               >
-                {/* X azul del logo */}
                 <div
                   style={{
                     width: 28,
                     height: 28,
                     borderRadius: 6,
-                    background: 'rgba(59,107,200,0.12)',
-                    border: '1px solid rgba(59,107,200,0.2)',
+                    background: 'rgba(136,90,57,0.12)',
+                    border: '1px solid rgba(136,90,57,0.2)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -76,7 +75,7 @@ export default function ProblemSection() {
                     marginTop: '0.05rem',
                   }}
                 >
-                  <X size={14} color="#3B6BC8" strokeWidth={2.5} />
+                  <X size={14} color="#885A39" strokeWidth={2.5} />
                 </div>
                 <p style={{ fontSize: '0.9375rem', color: 'var(--text-2)', lineHeight: 1.55 }}>{text}</p>
               </motion.div>

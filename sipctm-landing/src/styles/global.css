@@ -10,12 +10,12 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  background-color: var(--bg, #060810);
+  background-color: var(--bg, #0F0A06);
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--bg, #060810);
+  background-color: var(--bg, #0F0A06);
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -24,7 +24,7 @@ body {
 }
 
 [data-theme="light"] body {
-  background: linear-gradient(180deg, #EDF1FA 0%, #E4ECFA 50%, #EDF1FA 100%);
+  background: linear-gradient(180deg, #FDF7EB 0%, #F5EDD8 50%, #FDF7EB 100%);
 }
 
 a {
@@ -106,7 +106,7 @@ img, video {
 .btn-primary:hover {
   background: var(--blue-light);
   transform: translateY(-2px);
-  box-shadow: 0 4px 32px rgba(59, 107, 200, 0.5);
+  box-shadow: 0 4px 32px rgba(136, 90, 57, 0.5);
 }
 
 .btn-secondary {

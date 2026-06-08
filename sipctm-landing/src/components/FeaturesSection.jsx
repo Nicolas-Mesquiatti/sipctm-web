@@ -79,7 +79,7 @@ export default function FeaturesSection() {
                   initial={{ opacity: 0, y: 24 }}
                   animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(59,107,200,0.18)' }}
+                  whileHover={{ y: -4, boxShadow: '0 8px 32px rgba(136,90,57,0.18)' }}
                   className="glass-card"
                   style={{ padding: '1.75rem', cursor: 'default' }}
                 >
@@ -88,8 +88,8 @@ export default function FeaturesSection() {
                       width: 44,
                       height: 44,
                       borderRadius: 12,
-                      background: 'rgba(59,107,200,0.12)',
-                      border: '1px solid rgba(59,107,200,0.2)',
+                      background: 'rgba(136,90,57,0.12)',
+                      border: '1px solid rgba(136,90,57,0.2)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',

@@ -112,17 +112,15 @@ export default function Footer() {
         {/* Disclaimer académico */}
         <div
           style={{
-            borderTop: '1px solid var(--border)',
-            paddingTop: '1.25rem',
             marginBottom: '1rem',
-            background: 'rgba(59,107,200,0.04)',
+            background: 'rgba(136,90,57,0.06)',
             borderRadius: 8,
             padding: '0.875rem 1rem',
-            border: '1px solid rgba(59,107,200,0.12)',
+            border: '1px solid rgba(136,90,57,0.14)',
           }}
         >
           <p style={{ fontSize: '0.75rem', color: 'var(--text-3)', lineHeight: 1.6, textAlign: 'center' }}>
-            <span style={{ color: 'var(--blue-circuit)', fontWeight: 600 }}>Proyecto académico — TP Final 2025.</span>
+            <span style={{ color: 'var(--blue-main)', fontWeight: 600 }}>Proyecto académico — TP Final 2025.</span>
             {' '}Los precios y planes son referenciales. Sin pagos online. Para consultas, contactar por WhatsApp.
           </p>
         </div>

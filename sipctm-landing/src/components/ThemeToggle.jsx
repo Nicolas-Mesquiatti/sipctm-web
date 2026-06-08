@@ -11,7 +11,7 @@ export default function ThemeToggle({ theme, onToggle }) {
         width: 52,
         height: 28,
         borderRadius: 999,
-        background: isDark ? 'rgba(59,107,200,0.2)' : 'rgba(59,107,200,0.15)',
+        background: isDark ? 'rgba(136,90,57,0.2)' : 'rgba(136,90,57,0.15)',
         border: '1.5px solid var(--border)',
         display: 'flex',
         alignItems: 'center',
@@ -33,7 +33,7 @@ export default function ThemeToggle({ theme, onToggle }) {
           alignItems: 'center',
           justifyContent: 'center',
           marginLeft: isDark ? 0 : 'auto',
-          boxShadow: '0 0 8px rgba(59,107,200,0.6)',
+          boxShadow: '0 0 8px rgba(136,90,57,0.5)',
         }}
       >
         {isDark ? (
