@@ -1,26 +1,30 @@
 export default function LogoSVG({ size = 32 }) {
   return (
-    <div
-      style={{
-        background: 'rgba(87,56,33,0.07)',
-        borderRadius: 8,
-        padding: 3,
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexShrink: 0,
-      }}
-    >
-      <img
-        src="/Logo.png"
-        alt="SIPCTM"
+    <>
+      <style>{`
+        .sipctm-logo { transition: filter 0.3s ease; }
+        [data-theme="light"] .sipctm-logo { filter: brightness(0.75) contrast(1.1); }
+      `}</style>
+      <div
         style={{
-          height: size,
-          width: 'auto',
-          objectFit: 'contain',
-          display: 'block',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
         }}
-      />
-    </div>
+      >
+        <img
+          src="/Logo.png"
+          alt="SIPCTM"
+          className="sipctm-logo"
+          style={{
+            height: size,
+            width: 'auto',
+            objectFit: 'contain',
+            display: 'block',
+          }}
+        />
+      </div>
+    </>
   );
 }
